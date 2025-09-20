@@ -25,14 +25,19 @@ const generateResetSecret = (user)=>{
 }
 
 exports.register = [async(req,res)=>{
-    const { username, password ,email } = req.body;
+    try {
+        const { username, password ,email } = req.body;
     const hashpassword = await bcrypt.hash(password , 10)
     const user = new UserModel({
         email,
         username,
         password:hashpassword
     })
-     user.save().then((all)=>res.send(all)).catch((er)=>res.send(er.message))
+     user.save()
+     res.json({ message: "Registered successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
 }]
 
 

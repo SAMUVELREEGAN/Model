@@ -2,10 +2,11 @@ const UserController = require('../controller/UserController')
 
 const express = require('express')
 const { authenticateToken } = require('../middleware/authMiddleware')
+const { validateRegister  } = require('../middleware/validators')
 
 const UserRoute = express.Router()
 
-UserRoute.post('/register',UserController.register)
+UserRoute.post('/register',validateRegister,UserController.register)
 UserRoute.post('/login',UserController.login)
 UserRoute.post('/refresh',UserController.refresh)
 UserRoute.post('/logout',UserController.logout)

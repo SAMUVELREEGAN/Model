@@ -52,3 +52,26 @@ exports.login = [ async (req,res) =>{
     res.json({accessToken})
 
 }]
+
+exports.refresh = [(req,res)=>{
+    const token = req.cookie.refreshToken;
+    if(!token) return res.json({message:"Refresh token required"});
+    if(!refreshTokens.includes(token))return res.json({message: "Invalid refresh token"});
+    
+    jwt.verify(token ,REFRESH_SECRET ,(err , user)=>{
+        if (err) return res.json({ message: "Token expired/invalid" });
+    const newAccessToken = generateAccessToken(user)
+    res.json({accessToken:newAccessToken})
+    })
+}]
+
+exports.logout = [(req,res)=>{
+    token = req.cookie.refreshToken
+    refreshTokens = refreshTokens.filter(t => t !==token)
+    res.clearCookie("refreshToken")
+    res.json({ message: "Logged out successfully" });
+}]
+
+exports.protected=[(req,res)=>{
+    res.json({ message: "Protected route access granted", user: req.user });
+}]

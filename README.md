@@ -87,3 +87,5 @@ Supports **Register, Login, JWT Authentication, Forgot Password (Email), Reset P
 ```bash
 git clone https://github.com/SAMUVELREEGAN/Model.git
 cd Model
+
+

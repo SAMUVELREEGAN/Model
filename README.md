@@ -80,7 +80,6 @@ Supports **Register, Login, JWT Authentication, Forgot Password (Email), Reset P
 
 ---
 
-
 ## 🚀 Installation
 
 ### 1️⃣ Clone the repo
